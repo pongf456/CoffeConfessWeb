@@ -2,7 +2,7 @@ import {motion} from 'framer-motion'
 export const Loading = () => {
     return (
       <>
-        <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="w-full h-full flex items-center justify-center absolute">
+        <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="w-full h-full flex bg-slate-500/20 items-center justify-center absolute z-50">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" className="w-24">
             <path className="fill-gray-700 stroke-gray-700"
               strokeWidth="15"

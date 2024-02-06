@@ -15,13 +15,14 @@ function App() {
     <Background/>
     <Notifications/>
     <Helmet>
-      <title>Coofe Confess</title>
+      <title>Coffe Confess</title>
       <link rel="canonical" href={location.href} />
       <meta name="description" content="Send message anonimus to best friends." />
-      <meta property="og:title" content="Coofe Confess"/>
-      <meta property="og:site_name" content="coofeConfessPongfZT"/>
+      <meta property="og:title" content="Coffe Confess"/>
+      <meta property="og:site_name" content="Coffe Confess PongfZT"/>
       <meta property="og:url" content={location.href}/>
       <meta property="og:description" content="Send message anonimus for best friends"/>
+      <meta property="og:image" content={`${window.location.origin}/background.jpg`}/>
       <meta property="og:type" content= "website"/>
     </Helmet>
     <Routes>

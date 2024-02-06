@@ -43,18 +43,30 @@ const Room = () => {
         <div className="w-full h-full flex  justify-center flex-wrap relative overflow-auto">
         <div  className="w-full h-min flex sticky">
         <span className="font-Dmsans  flex items-center justify-center text-xs sm:text-base font-semibold text-slate-100 w-2/5 sm:w-3/5 select-none"><span className="w-full truncate p-1">@{globalVars.roomName}</span></span>
-        <button className="bg-slate-300 p-2 m-2 font-Dmsans font-medium text-xs sm:text-base  truncate text-slate-900 drop-shadow-md hover:bg-red-700 duration-300" onClick={()=>
+        <button className="bg-slate-300 p-2 m-2 font-Dmsans font-medium text-xs sm:text-base  truncate text-slate-900 drop-shadow-md hover:bg-red-700 duration-300" onClick={async ()=>
         {
-        pushNotifications({message:"sala eliminada correctamente",type:EnotifyTypes.succes})
-        coofeApi.deleteRoom()
-        }
-        }><i className="bi bi-x"></i> Eliminar sala</button>
-        <button className="bg-slate-300 p-2 m-2 font-Dmsans font-medium text-xs sm:text-base truncate text-slate-900 drop-shadow-md hover:bg-cyan-700 duration-300" onClick={
-            ()=>{
-             copy(`${location.href}/confess/${encodeURI(globalVars.roomName || "")}`)
-             pushNotifications({message:"copiado al portapapeles",type:EnotifyTypes.succes})
+        try { 
+            await coofeApi.deleteRoom()
+            pushNotifications({message:"sala eliminada correctamente",type:EnotifyTypes.succes})
             }
-        }><i className="bi bi-clipboard"></i>Copiar enlace</button>
+        catch {
+
+        }
+        }
+        }><i className="bi bi-journal-x"></i> <span>eliminar</span></button>
+        <button className="bg-slate-300 p-2 m-2 font-Dmsans font-medium text-xs sm:text-base truncate text-slate-900 drop-shadow-md hover:bg-cyan-700 duration-300" onClick={
+            async ()=>{
+            try {
+                await navigator.share({
+                    url:`${location.href}/confess/${encodeURI(globalVars.roomName || "")}`
+                 })
+            }
+            catch {
+                copy(`${location.href}/confess/${encodeURI(globalVars.roomName || "")}`)
+                pushNotifications({message:"copiado al portapapeles",type:EnotifyTypes.succes})
+            }
+            }
+        }><i className="bi bi-share"></i> <span>compartir</span></button>
         </div>
         {query.isLoading && (<Loading></Loading>)}
         {!query.isError && (
